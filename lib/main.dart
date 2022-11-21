@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Http',
+      title: 'News App',
       theme: ThemeData(appBarTheme: AppBarTheme(elevation: 0)),
       home: Home(),
     );

@@ -1,12 +1,28 @@
 import 'package:flutter/material.dart';
 
 class Detail extends StatelessWidget {
+
+  final url;
+  final title;
+  final content;
+  final publishedAt;
+  final author;
+  final urlToImage;
+
+  Detail({
+    this.url,
+    this.title,
+    this.content,
+    this.publishedAt,
+    this.author,
+    this.urlToImage});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          Container(
+          urlToImage != null ? Image.network(urlToImage) : Container(
             height: 250,
             color: Colors.grey[200],
           ),
@@ -16,19 +32,19 @@ class Detail extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'title',
+                  '$title',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 18),
                 Text(
-                    'date',
+                    '$publishedAt',
                   style: TextStyle(fontStyle: FontStyle.italic),
                 ),
                 SizedBox(height: 5),
-                Text ('content'),
+                Text ('$content'),
                 Divider(),
-                Text('Author : '),
-                Text('Sumber'),
+                Text('$author : '),
+                Text('$url'),
               ],
             ),
           )
