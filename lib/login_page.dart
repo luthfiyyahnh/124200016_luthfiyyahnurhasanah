@@ -1,89 +1,119 @@
 import 'dart:ui';
 
+import 'package:final_project/home.dart';
+import 'package:final_project/main.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
-  static String tag = 'login-page';
+  const LoginPage({Key? key}) : super(key: key);
   @override
-  _LoginPageState createState() => new _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String username = "";
+  String password = "";
+  bool isLoginSuccess = false;
   @override
   Widget build(BuildContext context) {
-    final logo = Hero(
-      tag: 'hero',
-      child: CircleAvatar(
-        backgroundColor: Colors.transparent,
-        radius: 48.0,
-        child: Image.asset('assets/alucard.png'),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Login Page"),
+          automaticallyImplyLeading: false,
+        ),
+        body: Column(children: [
+          _usernameField(),
+          _passwordField(),
+          _loginButton(context),
+        ]),
       ),
     );
+  }
 
-    final email = TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      initialValue: 'username',
-      decoration: InputDecoration(
-        hintText: 'password',
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final password = TextFormField(
-      autofocus: false,
-      initialValue: 'some password',
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: Material(
-        borderRadius: BorderRadius.circular(30.0),
-        shadowColor: Colors.lightBlueAccent.shade100,
-        elevation: 5.0,
-        child: MaterialButton(
-          minWidth: 200.0,
-          height: 42.0,
-          onPressed: () {
-          },
-          color: Colors.lightBlueAccent,
-          child: Text('Log In', style: TextStyle(color: Colors.white)),
+  Widget _usernameField() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: TextFormField(
+        enabled: true,
+        onChanged: (value) {
+          username = value;
+        },
+        decoration: InputDecoration(
+          hintText: 'Username',
+          contentPadding: const EdgeInsets.all(8.0),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide:
+                BorderSide(color: (isLoginSuccess) ? Colors.blue : Colors.red),
+          ),
         ),
       ),
     );
+  }
 
-    final forgotLabel = FlatButton(
-      child: Text(
-        'Forgot password?',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {},
-    );
-
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 30.0, right: 30.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0),
-            email,
-            SizedBox(height: 8.0),
-            password,
-            SizedBox(height: 24.0),
-            loginButton,
-            forgotLabel
-          ],
+  Widget _passwordField() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: TextFormField(
+        enabled: true,
+        obscureText: true,
+        onChanged: (value) {
+          password = value;
+        },
+        decoration: InputDecoration(
+          hintText: 'Password',
+          contentPadding: const EdgeInsets.all(8.0),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide: BorderSide(color: Colors.blue),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(8.0)),
+            borderSide:
+                BorderSide(color: (isLoginSuccess) ? Colors.blue : Colors.red),
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _loginButton(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      width: MediaQuery.of(context).size.width,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          primary: (isLoginSuccess) ? Colors.blue : Colors.red, // background
+          onPrimary: Colors.white, // foreground
+        ),
+        onPressed: () {
+          String text = "";
+          if (username == "flutterMobile" && password == "flutter123") {
+            setState(() {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BtnNavbar()));
+              text = "Login Success";
+              isLoginSuccess = true;
+            });
+          } else {
+            setState(() {
+              text = "Login Failed";
+              isLoginSuccess = false;
+            });
+          }
+          print("isLoginSuccess : $isLoginSuccess");
+          SnackBar snackBar = SnackBar(
+            content: Text(text),
+          );
+
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        child: Text("Login"),
       ),
     );
   }

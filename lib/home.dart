@@ -21,7 +21,10 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('News App')),
+      appBar: AppBar(
+        title: Text('News App'),
+        automaticallyImplyLeading: false,
+      ),
       body: ListView.builder(
         itemCount: _posts.length,
         itemBuilder: (context, index) {

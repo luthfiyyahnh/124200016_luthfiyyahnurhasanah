@@ -59,6 +59,7 @@ class _ProfileUserState extends State<ProfileUser> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Luthfiyyah Nur Hasannah'),
+        automaticallyImplyLeading: false,
       ),
       body: body,
     );
