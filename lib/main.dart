@@ -60,12 +60,12 @@ class _BtnNavbarState extends State<BtnNavbar> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Business',
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'Profile',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'School',
+            icon: Icon(Icons.logout_rounded),
+            label: 'Logout',
           ),
         ],
         currentIndex: _selectedIndex,

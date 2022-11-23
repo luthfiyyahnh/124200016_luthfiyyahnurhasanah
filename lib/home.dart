@@ -42,6 +42,7 @@ class _HomeState extends State<Home> {
             ),
             title: Text(
               '${_posts[index]['title']}',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
