@@ -4,6 +4,7 @@ import 'detail.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
+  static String tag = 'home-page';
   @override
   _HomeState createState() => _HomeState();
 }
@@ -32,7 +33,12 @@ class _HomeState extends State<Home> {
               width: 100,
               child: _posts[index]["urlToImage"] != null
                   ? Image.network(
-                      _posts[index]["urlToImage"],width: 100, fit: Boxfit,): Center(),
+                      _posts[index]["urlToImage"],
+                      width: 100,
+                      height: 50,
+                      fit: Boxfit,
+                    )
+                  : Center(),
             ),
             title: Text(
               '${_posts[index]['title']}',
