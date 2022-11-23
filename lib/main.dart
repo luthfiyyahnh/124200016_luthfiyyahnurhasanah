@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final routes = <String, WidgetBuilder>{
     Home.tag: (context) => Home(),
-    ProfileUser.tag: (context) => ProfileUser()
+    ProfileUser.tag: (context) => ProfileUser(),
   };
   @override
   Widget build(BuildContext context) {
