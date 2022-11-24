@@ -1,6 +1,5 @@
-import 'dart:js';
-
 import 'package:final_project/home.dart';
+import 'package:final_project/login_page.dart';
 import 'package:final_project/profile.dart';
 import 'package:flutter/material.dart';
 
@@ -31,14 +30,11 @@ class BtnNavbar extends StatefulWidget {
 class _BtnNavbarState extends State<BtnNavbar> {
   int _selectedIndex = 0;
   static TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     Home(),
     ProfileUser(),
-    Text(
-      'Index 2: School',
-      style: optionStyle,
-    ),
+    // LoginPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -53,6 +49,15 @@ class _BtnNavbarState extends State<BtnNavbar> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        mini: true,
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
+        },
+        child: const Icon(Icons.logout_rounded),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -62,10 +67,6 @@ class _BtnNavbarState extends State<BtnNavbar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_outlined),
             label: 'Profile',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.logout_rounded),
-            label: 'Logout',
           ),
         ],
         currentIndex: _selectedIndex,
